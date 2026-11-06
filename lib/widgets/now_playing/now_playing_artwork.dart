@@ -257,15 +257,7 @@ class _LyricsViewState extends State<_LyricsView> {
                   tooltip: 'Expand lyrics',
                   visualDensity: VisualDensity.compact,
                   iconSize: 17,
-                  onPressed: () async {
-                    final loadedLyrics = await _lyricsFuture;
-                    if (!context.mounted ||
-                        loadedLyrics == null ||
-                        loadedLyrics.isEmpty) {
-                      return;
-                    }
-                    _showExpandedLyrics(context, loadedLyrics);
-                  },
+                  onPressed: () => _showExpandedLyrics(context, lyrics),
                   icon: const Icon(Icons.open_in_full_rounded),
                 ),
               ],
@@ -437,7 +429,7 @@ class _AudioQualityBadgeState extends State<_AudioQualityBadge> {
   }
 
   void _resolveIfNeeded() {
-    final ytid = widget.metadata.extras?['ytid']?.toString();
+    final ytid = widget.metadata.extras['ytid']?.toString();
     if (ytid == _resolvedYtid) return;
     _resolvedYtid = ytid;
 
